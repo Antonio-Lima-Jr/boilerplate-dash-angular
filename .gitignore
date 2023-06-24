@@ -1,3 +1,7 @@
 /venv/
 /.vscode/
+
 /docker/
+!docker/grafana/datasources/
+!docker/grafana/dashboard.yaml
+!docker/grafana/grafana-data/dashboards/
