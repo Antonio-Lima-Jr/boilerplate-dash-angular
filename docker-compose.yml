@@ -1,0 +1,120 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+    container_name: api
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+      - redis
+      - rabbitmq
+      # - worker
+    environment:
+      ENV: test
+      DB_NAME: admin
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_HOST: database
+      DB_PORT: 5432
+      RABBITMQ_URL: pyamqp://guest:guest@queue:5672
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/home/app/webapp
+    networks:
+      network:
+
+  worker:
+    build:
+      context: .
+    container_name: worker_1
+    environment:
+      ENV: test
+      DB_NAME: admin
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_HOST: database
+      DB_PORT: 5432
+      RABBITMQ_URL: pyamqp://guest:guest@queue:5672
+    command: celery -A django_celery worker --loglevel=DEBUG
+    depends_on: 
+      - rabbitmq
+      - db
+    volumes:
+      - .:/home/app/webapp
+    links: 
+      - rabbitmq
+    networks:
+      network:
+
+  db: 
+    image: postgres:13-alpine
+    container_name: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ./docker/dbdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "admin"
+    networks:
+      network:
+        aliases:
+          - database
+
+  redis:
+    image: redis:5.0
+    container_name: redis
+    restart: always
+    ports:
+      - 6379:6379
+    volumes:
+      - redisdata:/data
+    networks:
+      network:
+
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    networks:
+      network:
+        aliases:
+          - queue
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgAdmin
+    ports:
+      - 8080:80
+    volumes:
+      - pgadmindata:/var/lib/pgadmin
+      - ./docker/pgadmin/dumps:/home
+      - ./docker/pgadmin/servers.json:/pgadmin4/servers.json
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "postgres@teste.com"
+      PGADMIN_DEFAULT_PASSWORD: "postgres"
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    depends_on:
+      - db
+    networks:
+      network:
+
+volumes:
+  dbdata:
+  redisdata:
+  pgadmindata:
+
+networks:
+  network:
+
+
+

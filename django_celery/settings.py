@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'celery',
 ]
 
 MIDDLEWARE = [
@@ -74,12 +76,24 @@ WSGI_APPLICATION = 'django_celery.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get("DB_NAME",'admin' ),
+        'USER': os.environ.get("DB_USER",'postgres' ),
+        'PASSWORD': os.environ.get("DB_PASSWORD",'postgres' ),
+        'HOST': os.environ.get("DB_HOST",'localhost' ),
+        'PORT': os.environ.get("DB_PORT",'5432' ),
     }
 }
 
+# Celery config
+CELERY_BROKER_URL = os.environ.get('RABBITMQ_URL', 'pyamqp://guest:guest@localhost:5673')
+DATABASES_DEFAULT = DATABASES["default"]
+CELERY_RESULT_BACKEND = f'db+postgresql+psycopg2://{DATABASES_DEFAULT["USER"]}:{DATABASES_DEFAULT["PASSWORD"]}@{DATABASES_DEFAULT["HOST"]}:{DATABASES_DEFAULT["PORT"]}/{DATABASES_DEFAULT["NAME"]}'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -103,9 +117,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-BR'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
