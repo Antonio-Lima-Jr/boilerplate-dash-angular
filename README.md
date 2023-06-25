@@ -4,6 +4,14 @@ This README provides an overview of the services defined in the given Docker Com
 
 ## Services
 
+
+- [web](http://localhost:8000)
+- [rabbitmq (Management UI)](http://localhost:15672)
+- [pgadmin](http://localhost:8080)
+- [prometheus](http://localhost:9090)
+- [cadvisor](http://localhost:8081)
+- [grafana](http://localhost:3001)
+
 ### web
 
 - **Port**: `8000`

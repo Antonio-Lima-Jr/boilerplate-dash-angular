@@ -20,7 +20,6 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 13946,
   "graphTooltip": 0,
-  "id": 5,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -59,7 +58,7 @@
       "description": "",
       "fontSize": "100%",
       "gridPos": {
-        "h": 7,
+        "h": 3,
         "w": 24,
         "x": 0,
         "y": 1
@@ -442,7 +441,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 8
+        "y": 4
       },
       "id": 4,
       "panels": [],
@@ -480,7 +479,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 9
+        "y": 5
       },
       "hiddenSeries": false,
       "id": 14,
@@ -580,7 +579,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 18
+        "y": 14
       },
       "hiddenSeries": false,
       "id": 16,
@@ -667,7 +666,7 @@
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "links": []
         },
         "overrides": []
       },
@@ -677,7 +676,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 27
+        "y": 23
       },
       "hiddenSeries": false,
       "id": 24,
@@ -699,11 +698,10 @@
       "linewidth": 2,
       "nullPointMode": "connected",
       "options": {
-        "alertThreshold": true,
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.3",
+      "pluginVersion": "10.0.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -767,7 +765,7 @@
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "links": []
         },
         "overrides": []
       },
@@ -777,7 +775,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 27
+        "y": 23
       },
       "hiddenSeries": false,
       "id": 22,
@@ -800,11 +798,10 @@
       "linewidth": 2,
       "nullPointMode": "connected",
       "options": {
-        "alertThreshold": true,
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.3",
+      "pluginVersion": "10.0.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -868,7 +865,7 @@
       },
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "links": []
         },
         "overrides": []
       },
@@ -878,7 +875,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 36
+        "y": 32
       },
       "hiddenSeries": false,
       "id": 20,
@@ -901,11 +898,10 @@
       "linewidth": 2,
       "nullPointMode": "connected",
       "options": {
-        "alertThreshold": true,
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.3",
+      "pluginVersion": "10.0.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -967,7 +963,7 @@
       },
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "links": []
         },
         "overrides": []
       },
@@ -977,7 +973,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 36
+        "y": 32
       },
       "hiddenSeries": false,
       "id": 18,
@@ -1000,11 +996,10 @@
       "linewidth": 2,
       "nullPointMode": "connected",
       "options": {
-        "alertThreshold": true,
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.3",
+      "pluginVersion": "10.0.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1161,8 +1156,8 @@
         "allValue": ".*",
         "current": {
           "selected": false,
-          "text": "br-c52df9ea9bbc",
-          "value": "br-c52df9ea9bbc"
+          "text": "br-afcace62579e",
+          "value": "br-afcace62579e"
         },
         "datasource": {
           "type": "prometheus",
@@ -1257,6 +1252,6 @@
   "timezone": "browser",
   "title": "Docker Monitoring 1",
   "uid": "asdasdasd",
-  "version": 2,
+  "version": 1,
   "weekStart": ""
 }
