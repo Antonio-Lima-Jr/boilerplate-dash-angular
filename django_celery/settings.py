@@ -92,12 +92,12 @@ DATABASES = {
 }
 
 # Celery config
-CELERY_BROKER_URL = os.environ.get('RABBITMQ_URL', 'pyamqp://guest:guest@localhost:5673')
 DATABASES_DEFAULT = DATABASES["default"]
+CELERY_BROKER_URL = os.environ.get('RABBITMQ_URL', 'pyamqp://guest:guest@localhost:5673')
 CELERY_RESULT_BACKEND = f'db+postgresql+psycopg2://{DATABASES_DEFAULT["USER"]}:{DATABASES_DEFAULT["PASSWORD"]}@{DATABASES_DEFAULT["HOST"]}:{DATABASES_DEFAULT["PORT"]}/{DATABASES_DEFAULT["NAME"]}'
-CELERY_TIMEZONE = "America/Sao_Paulo"
+CELERY_TIMEZONE = 'America/Sao_Paulo'
 CELERY_ENABLE_UTC = True
-# CELERY_IMPORTS = ("app", )
+CELERY_IMPORTS = ('app', )
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
