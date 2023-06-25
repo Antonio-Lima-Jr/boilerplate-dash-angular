@@ -2,10 +2,16 @@
 
 This README provides an overview of the services defined in the given Docker Compose configuration and describes how to access each service on localhost.
 
+Run with:
+```
+docker-compose up -d
+```
+
 ## Services
 
 
 - [web](http://localhost:8000)
+- [web - ADMIN](http://localhost:8000/admin)
 - [rabbitmq (Management UI)](http://localhost:15672)
 - [pgadmin](http://localhost:8080)
 - [prometheus](http://localhost:9090)
@@ -67,11 +73,6 @@ This README provides an overview of the services defined in the given Docker Com
 - **Description**: This service collects and exports container resource usage information.
 - **Access**: To access cAdvisor, open a web browser and navigate to `http://localhost:8081`.
 
-<!-- ### grafana
-
-- **Port**: `3001`
-- **Description**: This service runs Grafana, a platform for analytics and monitoring.
-- **Access**: To access Grafana, open a web browser and navigate to `http://localhost:3001`. The default login credentials are not specified in the provided configuration. -->
 ### grafana
 
 - **Port**: `3001`
@@ -88,3 +89,11 @@ This README provides an overview of the services defined in the given Docker Com
 
 
 Note: The services mentioned above can be accessed on localhost unless there are conflicting services running on the same ports. Make sure the required dependencies are properly installed and the necessary network configurations are in place before running the Docker Compose configuration.
+
+### API
+
+Create user to admin
+
+```
+python3 manage.py createsuperuser
+```

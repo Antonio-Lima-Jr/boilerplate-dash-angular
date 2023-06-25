@@ -1,5 +1,8 @@
 /venv/
 /.vscode/
+/celerybeat-schedule/
+log.txt
+/celerybeat/
 
 /docker/
 !docker/grafana/datasources/
