@@ -1,0 +1,37 @@
+POST http://localhost:8000/api/token/ HTTP/1.1
+content-type: application/json
+
+{
+    "username": "admin",
+    "password": "admin"
+}
+
+###
+POST http://localhost:8000/api/token/refresh/ HTTP/1.1
+content-type: application/json
+
+{
+    "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY4NzgyMTE0MiwiaWF0IjoxNjg3NzM0NzQyLCJqdGkiOiJkY2U3NDcyZTg3MjI0NzIyYWRhMmM3MGYzZTc1MTM5MyIsInVzZXJfaWQiOjF9.-4Oz2m5mNp9dopZ_i0u8yxnkeWJBRg7jA5xmIGixneY"
+}
+
+###
+
+POST http://localhost:8000/api/token/verify/ HTTP/1.1
+content-type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3NzM1MzI5LCJpYXQiOjE2ODc3MzUwMjksImp0aSI6IjE4NTkzNGRmY2VhMjRlNTI5MDVjZDFlMTY4YTVhZjZjIiwidXNlcl9pZCI6MX0.vvBRhrjvTb5gAL-aP0uVFnTVOFHmND4UxCPZIn-lgzY"
+}
+
+###
+
+
+GET http://localhost:8000/users/ HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3NzUzMzYxLCJpYXQiOjE2ODc3NTMwNjEsImp0aSI6IjY0ODQzMTYyN2FkNzQzODc4NmQ5NWEyZTE5ZDFlNWFmIiwidXNlcl9pZCI6MX0.mNx7QKTa10wkL471-NqW0hPjbrjQl8WnEt9CxbaHOpc
+###
+
+
+GET http://localhost:8000/users/1/ HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3NzUzMzYxLCJpYXQiOjE2ODc3NTMwNjEsImp0aSI6IjY0ODQzMTYyN2FkNzQzODc4NmQ5NWEyZTE5ZDFlNWFmIiwidXNlcl9pZCI6MX0.mNx7QKTa10wkL471-NqW0hPjbrjQl8WnEt9CxbaHOpc
