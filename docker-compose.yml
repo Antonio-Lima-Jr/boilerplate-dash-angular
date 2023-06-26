@@ -3,7 +3,8 @@ version: '3'
 services:
   web:
     build:
-      context: .
+      context: ./api
+      dockerfile: Dockerfile
     container_name: api
     ports:
       - 8000:8000
@@ -11,7 +12,6 @@ services:
       - db
       - redis
       - rabbitmq
-      # - worker
     environment:
       ENV: test
       DB_NAME: admin
@@ -22,13 +22,14 @@ services:
       RABBITMQ_URL: pyamqp://guest:guest@queue:5672
     command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     volumes:
-      - .:/home/app/webapp
+      - ./api:/home/app/webapp
     networks:
       network:
 
   worker:
     build:
-      context: .
+      context: ./api
+      dockerfile: Dockerfile
     container_name: worker_1
     environment:
       ENV: test
@@ -43,7 +44,7 @@ services:
       - rabbitmq
       - db
     volumes:
-      - .:/home/app/webapp
+      - ./api:/home/app/webapp
     links:
       - rabbitmq
     networks:
@@ -51,7 +52,8 @@ services:
 
   celerybeat:
     build:
-      context: .
+      context: ./api
+      dockerfile: Dockerfile
     container_name: celerybeat
     environment:
       ENV: test
@@ -66,7 +68,7 @@ services:
       - rabbitmq
       - db
     volumes:
-      - .:/home/app/webapp
+      - ./api:/home/app/webapp
     links:
       - rabbitmq
     networks:
