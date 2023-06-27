@@ -1,0 +1,113 @@
+<div class="row">
+  <div class="col-12">
+    <nb-card>
+      <nb-card-header>Profile</nb-card-header>
+      <nb-card-body>
+        <form [formGroup]="form" (ngSubmit)="submitForm()">
+          <div class="form-group row">
+            <label
+              for="inputUsername"
+              class="label col-sm-3 col-form-label"
+              >Username</label
+            >
+            <div class="col-sm-9">
+              <input
+                type="text"
+                nbInput
+                fullWidth
+                id="inputUsername"
+                placeholder="Username"
+                formControlName="username"
+              />
+            </div>
+          </div>
+          <!-- Username end -->
+          <div class="form-group row">
+            <label
+              for="inputFullName"
+              class="label col-sm-3 col-form-label"
+              >Full Name</label
+            >
+            <div class="col-sm-9">
+              <input
+                type="text"
+                nbInput
+                fullWidth
+                id="inputFullName"
+                placeholder="Full Name"
+                formControlName="fullName"
+              />
+            </div>
+          </div>
+          <!-- Full Name end -->
+          <div class="form-group row">
+            <label
+              for="inputPicture"
+              class="label col-sm-3 col-form-label"
+              >Picture</label
+            >
+            <div class="col-sm-9">
+              <input
+                type="file"
+                nbInput
+                fullWidth
+                id="inputPicture"
+                placeholder="Picture"
+                formControlName="picture"
+              />
+            </div>
+          </div>
+          <!-- Picture end -->
+          <div class="form-group row">
+            <label
+              for="inputEMail"
+              class="label col-sm-3 col-form-label"
+              >Email</label
+            >
+            <div class="col-sm-9">
+              <input
+                type="email"
+                nbInput
+                fullWidth
+                id="inputEmail"
+                placeholder="Email"
+                formControlName="email"
+              />
+            </div>
+          </div>
+          <!-- Email end -->
+          <div class="form-group row">
+            <label
+              for="inputTheme"
+              class="label col-sm-3 col-form-label"
+              >Theme</label
+            >
+            <div class="col-sm-9">
+              <nb-select status="primary" formControlName="theme">
+                <nb-option
+                  *ngFor="let theme of themes"
+                  [value]="theme.value"
+                >
+                  {{ theme.name }}</nb-option
+                >
+              </nb-select>
+            </div>
+          </div>
+          <!-- Theme end -->
+          <div class="form-group row">
+            <div class="offset-md-9 col-sm-12 col-md-3 col-lg-3">
+              <button
+                type="submit"
+                nbButton
+                status="primary"
+                style="width: 100%"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

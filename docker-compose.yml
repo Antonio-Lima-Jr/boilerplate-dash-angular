@@ -1,6 +1,14 @@
 version: '3'
 
 services:
+  front:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    container_name: front
+    ports:
+      - 80:80
+
   web:
     build:
       context: ./api
