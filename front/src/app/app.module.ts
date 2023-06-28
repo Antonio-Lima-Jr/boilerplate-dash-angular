@@ -39,7 +39,7 @@ import { Interceptor } from './app.interceptor';
     NbToastrModule.forRoot(),
     NbSpinnerModule,
     NbChatModule.forRoot({
-      messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
+      messageGoogleMapKey: '',
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),

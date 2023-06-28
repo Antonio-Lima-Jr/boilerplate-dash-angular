@@ -1,11 +1,7 @@
 from m_user import views
 from django.contrib import admin
 from django.urls import path, include, re_path
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-    TokenVerifyView,
-)
+
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import routers
@@ -32,22 +28,7 @@ router.register(r"groups", views.GroupViewSet)
 urlpatterns = [
     path("", include(router.urls)),
     path("admin/", admin.site.urls, name="admin"),
-    # Auth
-    path(
-        "api/token/",
-        TokenObtainPairView.as_view(),
-        name="token_obtain_pair",
-    ),
-    path(
-        "api/token/refresh/",
-        TokenRefreshView.as_view(),
-        name="token_refresh",
-    ),
-    path(
-        "api/token/verify/",
-        TokenVerifyView.as_view(),
-        name="token_verify",
-    ),
+    path("api/v1/auth/", include("m_token.urls"), name="token"),
     # Docs
     re_path(
         r"^doc(?P<format>\.json|\.yaml)$",

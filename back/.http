@@ -1,13 +1,13 @@
-POST http://localhost:8000/api/token/ HTTP/1.1
+POST http://localhost:8000/api/v1/auth/login HTTP/1.1
 content-type: application/json
 
 {
-    "username": "admin",
+    "email": "admin@admin.com",
     "password": "admin"
 }
 
 ###
-POST http://localhost:8000/api/token/refresh/ HTTP/1.1
+POST http://localhost:8000/api/v1/auth/refresh HTTP/1.1
 content-type: application/json
 
 {
@@ -16,7 +16,7 @@ content-type: application/json
 
 ###
 
-POST http://localhost:8000/api/token/verify/ HTTP/1.1
+POST http://localhost:8000/api/v1/auth/verify HTTP/1.1
 content-type: application/json
 
 {
@@ -26,12 +26,12 @@ content-type: application/json
 ###
 
 
-GET http://localhost:8000/users/ HTTP/1.1
+GET http://localhost:8000/users HTTP/1.1
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3NzUzMzYxLCJpYXQiOjE2ODc3NTMwNjEsImp0aSI6IjY0ODQzMTYyN2FkNzQzODc4NmQ5NWEyZTE5ZDFlNWFmIiwidXNlcl9pZCI6MX0.mNx7QKTa10wkL471-NqW0hPjbrjQl8WnEt9CxbaHOpc
 ###
 
 
-GET http://localhost:8000/users/1/ HTTP/1.1
+GET http://localhost:8000/users/1 HTTP/1.1
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3NzUzMzYxLCJpYXQiOjE2ODc3NTMwNjEsImp0aSI6IjY0ODQzMTYyN2FkNzQzODc4NmQ5NWEyZTE5ZDFlNWFmIiwidXNlcl9pZCI6MX0.mNx7QKTa10wkL471-NqW0hPjbrjQl8WnEt9CxbaHOpc

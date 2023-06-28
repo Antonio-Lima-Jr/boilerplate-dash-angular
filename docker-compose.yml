@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: front
     ports:
-      - 80:80
+      - 8001:8001
 
   back:
     build:
@@ -28,7 +28,7 @@ services:
       DB_HOST: database
       DB_PORT: 5432
       RABBITMQ_URL: pyamqp://guest:guest@queue:5672
-    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - ./back:/home/app/webapp
     networks:

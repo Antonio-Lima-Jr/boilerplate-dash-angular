@@ -17,7 +17,7 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+AUTH_USER_MODEL = "m_user.MUser"
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "drf_yasg",
     "celery",
-    "m_user"
+    "m_user",
+    "m_token",
+    "corsheaders",
 ]
 
 # Rest framework
@@ -67,6 +69,7 @@ SIMPLE_JWT = {
 }
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -75,6 +78,13 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+CORS_ORIGIN_WHITELIST = (
+    "http://localhost:80",
+    "http://localhost:8001",
+    "http://127.0.0.1:80",
+)
+
+APPEND_SLASH=False
 
 ROOT_URLCONF = "app.urls"
 

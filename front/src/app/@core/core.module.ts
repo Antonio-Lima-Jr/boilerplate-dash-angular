@@ -76,10 +76,10 @@ export const NB_CORE_PROVIDERS = [
       // Estrategia de login padrão utilizada na rota auth/login
       NbPasswordAuthStrategy.setup({
         name: "email",
-        baseEndpoint: "/api/v1/",
+        baseEndpoint: "http://localhost:8000/api/v1/",
         token: {
           class: NbAuthJWTToken,
-          key: "access_token", // this parameter tells where to look for the token
+          key: "access", // this parameter tells where to look for the token
         },
         login: {
           method: "post",
