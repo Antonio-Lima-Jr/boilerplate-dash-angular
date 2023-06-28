@@ -1,4 +1,4 @@
-from django_celery.celery import app
+from app.celery import app
 from celery.schedules import crontab
 
 

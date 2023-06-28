@@ -9,11 +9,11 @@ services:
     ports:
       - 80:80
 
-  web:
+  back:
     build:
-      context: ./api
+      context: ./back
       dockerfile: Dockerfile
-    container_name: api
+    container_name: back
     ports:
       - 8000:8000
     depends_on:
@@ -30,13 +30,13 @@ services:
       RABBITMQ_URL: pyamqp://guest:guest@queue:5672
     command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     volumes:
-      - ./api:/home/app/webapp
+      - ./back:/home/app/webapp
     networks:
       network:
 
   worker:
     build:
-      context: ./api
+      context: ./back
       dockerfile: Dockerfile
     container_name: worker_1
     environment:
@@ -47,12 +47,12 @@ services:
       DB_HOST: database
       DB_PORT: 5432
       RABBITMQ_URL: pyamqp://guest:guest@queue:5672
-    command: celery -A django_celery worker --loglevel=DEBUG
+    command: celery -A app worker --loglevel=DEBUG
     depends_on:
       - rabbitmq
       - db
     volumes:
-      - ./api:/home/app/webapp
+      - ./back:/home/app/webapp
     links:
       - rabbitmq
     networks:
@@ -60,7 +60,7 @@ services:
 
   celerybeat:
     build:
-      context: ./api
+      context: ./back
       dockerfile: Dockerfile
     container_name: celerybeat
     environment:
@@ -71,12 +71,12 @@ services:
       DB_HOST: database
       DB_PORT: 5432
       RABBITMQ_URL: pyamqp://guest:guest@queue:5672
-    command: celery -A django_celery beat -s celerybeat/celerybeat-schedule --loglevel=DEBUG
+    command: celery -A app beat -s celerybeat/celerybeat-schedule --loglevel=DEBUG
     depends_on:
       - rabbitmq
       - db
     volumes:
-      - ./api:/home/app/webapp
+      - ./back:/home/app/webapp
     links:
       - rabbitmq
     networks:

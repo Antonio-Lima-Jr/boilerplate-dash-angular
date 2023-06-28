@@ -10,8 +10,9 @@ docker-compose up -d
 ## Services
 
 
-- [web](http://localhost:8000)
-- [web - ADMIN](http://localhost:8000/admin)
+- [front](http://localhost:80)
+- [back](http://localhost:8000)
+- [back - ADMIN](http://localhost:8000/admin)
 - [rabbitmq (Management UI)](http://localhost:15672)
 - [pgadmin](http://localhost:8080)
 - [prometheus](http://localhost:9090)
