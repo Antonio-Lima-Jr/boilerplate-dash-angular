@@ -1,13 +1,10 @@
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import {
   NbActionsModule,
   NbButtonModule,
   NbCardModule,
-  NbCheckboxModule,
-  NbDatepickerModule,
   NbIconModule,
-  NbInputModule,
   NbListModule,
   NbRadioModule,
   NbSelectModule,
@@ -21,8 +18,6 @@ import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard.routing';
 import { NewsComponent } from './news/news.component';
 import { OverviewComponent } from './overview/overview.component';
-import { ProfileComponent } from './profile/profile.component';
-import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   imports: [
@@ -39,11 +34,11 @@ import { SettingsComponent } from './settings/settings.component';
     NbIconModule,
     NgxEchartsModule,
     DashboardRoutingModule,
-    NbInputModule,
-    NbCheckboxModule,
-    NbDatepickerModule,
-    ReactiveFormsModule,
   ],
-  declarations: [DashboardComponent, OverviewComponent, NewsComponent, SettingsComponent, ProfileComponent],
+  declarations: [
+    DashboardComponent,
+    OverviewComponent,
+    NewsComponent,
+  ],
 })
 export class DashboardModule {}

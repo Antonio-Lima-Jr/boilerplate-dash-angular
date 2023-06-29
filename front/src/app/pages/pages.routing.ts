@@ -1,8 +1,8 @@
-import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import { PagesComponent } from './pages.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
+import { PagesComponent } from './pages.component';
 
 const routes: Routes = [
   {
@@ -10,12 +10,14 @@ const routes: Routes = [
     component: PagesComponent,
     children: [
       {
-        path: '', // http://localhost:4200/pages/dashboard
+        path: '', // http://localhost:8001/dashboard
         loadChildren: () =>
-          import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+          import('./dashboard/dashboard.module').then(
+            (m) => m.DashboardModule
+          ),
       },
       {
-        path: 'miscellaneous', // http://localhost:4200/pages/miscellaneous
+        path: 'miscellaneous', // http://localhost:8001/dashboard/miscellaneous
         loadChildren: () =>
           import('./miscellaneous/miscellaneous.module').then(
             (m) => m.MiscellaneousModule

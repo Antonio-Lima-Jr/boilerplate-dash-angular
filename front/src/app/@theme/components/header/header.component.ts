@@ -1,33 +1,47 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { NbAuthResult, NbAuthService } from "@nebular/auth";
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   NbMediaBreakpointsService,
-  NbMenuItem,
   NbMenuService,
   NbSidebarService,
   NbThemeService,
-} from "@nebular/theme";
-import { Subject } from "rxjs";
-import { map, takeUntil } from "rxjs/operators";
+} from '@nebular/theme';
 
-import { UserData } from "../../../@core/data/user.data";
-import { LayoutService } from "../../../@core/utils";
+import { Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
+import { UserData } from '../../../@core/data/user.data';
+import { LayoutService } from '../../../@core/utils';
 
 @Component({
-  selector: "ngx-header",
-  styleUrls: ["./header.component.scss"],
-  templateUrl: "./header.component.html",
+  selector: 'ngx-header',
+  styleUrls: ['./header.component.scss'],
+  templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
   userPictureOnly: boolean = false;
 
-  userMenu: NbMenuItem[] = [
-    { title: "Profile", icon: "person-outline" },
-    { title: "Settings", icon: "settings-2-outline" },
-    { title: "Log out", icon: "log-out-outline" },
+  themes = [
+    {
+      value: 'default',
+      name: 'Light',
+    },
+    {
+      value: 'dark',
+      name: 'Dark',
+    },
+    {
+      value: 'cosmic',
+      name: 'Cosmic',
+    },
+    {
+      value: 'corporate',
+      name: 'Corporate',
+    },
   ];
+
+  currentTheme = 'default';
+
+  userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
 
   constructor(
     private sidebarService: NbSidebarService,
@@ -35,12 +49,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private themeService: NbThemeService,
     private userService: UserData,
     private layoutService: LayoutService,
-    private breakpointService: NbMediaBreakpointsService,
-    private authService: NbAuthService,
-    private router: Router
+    private breakpointService: NbMediaBreakpointsService
   ) {}
 
   ngOnInit() {
+    this.userService.theme$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((theme) => {
+        this.themeService.changeTheme(theme);
+        this.currentTheme = theme;
+      });
+
     const { xl } = this.breakpointService.getBreakpointsMap();
 
     this.themeService
@@ -50,35 +69,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$)
       )
       .subscribe(
-        (isLessThanXl: boolean) => (this.userPictureOnly = isLessThanXl)
+        (isLessThanXl: boolean) =>
+          (this.userPictureOnly = isLessThanXl)
       );
-
-    const MENU_PROFILE_ACTIONS: { [key: string]: () => void } = {
-      "Log out": () => this.logout(),
-      Profile: () => this.router.navigateByUrl("/dashboard/profile"),
-      Settings: () => this.router.navigateByUrl("/dashboard/settings"),
-    };
-
-    this.menuService
-      .onItemClick()
-      .pipe(map(({ item: { title } }) => title))
-      .subscribe((title) => {
-        if (MENU_PROFILE_ACTIONS.hasOwnProperty(title)) {
-          MENU_PROFILE_ACTIONS[title]();
-        }
-      });
-  }
-
-  logout() {
-    this.authService
-      .logout("email")
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((result: NbAuthResult) => {
-        const redirect = result.getRedirect();
-        if (redirect) {
-          return this.router.navigateByUrl(redirect);
-        }
-      });
   }
 
   ngOnDestroy() {
@@ -86,8 +79,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  changeTheme(themeName: string) {
+    this.userService.updateTheme(themeName);
+  }
+
   toggleSidebar(): boolean {
-    this.sidebarService.toggle(true, "menu-sidebar");
+    this.sidebarService.toggle(true, 'menu-sidebar');
     this.layoutService.changeLayoutSize();
 
     return false;

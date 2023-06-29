@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { UserData } from '../../../@core/data/user.data';
 
 @Component({
@@ -8,7 +7,7 @@ import { UserData } from '../../../@core/data/user.data';
   styleUrls: ['./overview.component.scss'],
 })
 export class OverviewComponent {
-  constructor(private userService: UserData) {}
+  constructor(private authService: UserData) {}
 
-  theme$ = this.userService.theme$;
+  theme$ = this.authService.theme$;
 }

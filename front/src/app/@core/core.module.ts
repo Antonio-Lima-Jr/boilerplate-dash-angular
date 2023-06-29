@@ -1,46 +1,47 @@
-import { CommonModule } from "@angular/common";
+import { CommonModule } from '@angular/common';
 import {
   ModuleWithProviders,
   NgModule,
   Optional,
   SkipSelf,
-} from "@angular/core";
+} from '@angular/core';
 import {
   NbAuthJWTToken,
   NbAuthModule,
   NbPasswordAuthStrategy,
-} from "@nebular/auth";
-import { NbRoleProvider, NbSecurityModule } from "@nebular/security";
-import { of as observableOf } from "rxjs";
+} from '@nebular/auth';
+import { NbRoleProvider, NbSecurityModule } from '@nebular/security';
+import { of as observableOf } from 'rxjs';
 
-import { UserData } from "./data/user.data";
-import { MockDataModule } from "./mock/mock-data.module";
-import { throwIfAlreadyLoaded } from "./module-import-guard";
-import { ServicesModule } from "./services/services.module";
-import UserService from "./services/user.service";
+import { throwIfAlreadyLoaded } from './module-import-guard';
 import {
   AnalyticsService,
   LayoutService,
   PlayerService,
   SeoService,
   StateService,
-} from "./utils";
+} from './utils';
+
+import { UserData } from './data/user.data';
+import { MockDataModule } from './mock/mock-data.module';
+import { ServicesModule } from './services/services.module';
+import UserService from './services/user.service';
 
 const socialLinks = [
   {
-    url: "https://github.com/akveo/nebular",
-    target: "_blank",
-    icon: "github",
+    url: 'https://github.com/akveo/nebular',
+    target: '_blank',
+    icon: 'github',
   },
   {
-    url: "https://www.facebook.com/akveo/",
-    target: "_blank",
-    icon: "facebook",
+    url: 'https://www.facebook.com/akveo/',
+    target: '_blank',
+    icon: 'facebook',
   },
   {
-    url: "https://twitter.com/akveo_inc",
-    target: "_blank",
-    icon: "twitter",
+    url: 'https://twitter.com/akveo_inc',
+    target: '_blank',
+    icon: 'twitter',
   },
 ];
 
@@ -49,7 +50,7 @@ const DATA_SERVICES = [{ provide: UserData, useClass: UserService }];
 export class NbSimpleRoleProvider extends NbRoleProvider {
   getRole() {
     // here you could provide any role based on any auth flow
-    return observableOf("guest");
+    return observableOf('guest');
   }
 }
 
@@ -75,44 +76,44 @@ export const NB_CORE_PROVIDERS = [
       // }),
       // Estrategia de login padrão utilizada na rota auth/login
       NbPasswordAuthStrategy.setup({
-        name: "email",
-        baseEndpoint: "http://localhost:8000/api/v1/",
+        name: 'email',
+        baseEndpoint: 'http://localhost:8000/api/v1/',
         token: {
           class: NbAuthJWTToken,
-          key: "access", // this parameter tells where to look for the token
+          key: 'access', // this parameter tells where to look for the token
         },
         login: {
-          method: "post",
+          method: 'post',
           requireValidToken: true,
-          endpoint: "auth/login",
+          endpoint: 'auth/login',
           redirect: {
-            success: "/dashboard",
+            success: '/dashboard',
             failure: null,
           },
-          defaultErrors: ["Login/Email combination is not correct"],
+          defaultErrors: ['Login/Email combination is not correct'],
         },
         register: {
-          endpoint: "auth/register",
-          method: "post",
+          endpoint: 'auth/register',
+          method: 'post',
           requireValidToken: true,
           redirect: {
-            success: "/dashboard",
+            success: '/dashboard',
             failure: null,
           },
-          defaultErrors: ["Something went wrong, please try again."],
-          defaultMessages: ["You have been successfully registered."],
+          defaultErrors: ['Something went wrong, please try again.'],
+          defaultMessages: ['You have been successfully registered.'],
         },
         logout: {
-          method: "post",
-          endpoint: "auth/logout",
+          method: 'post',
+          endpoint: 'auth/logout',
           redirect: {
-            success: "/auth/login",
+            success: '/auth/login',
             failure: null,
           },
         },
         refreshToken: {
-          endpoint: "auth/refresh",
-          method: "post",
+          endpoint: 'auth/refresh',
+          method: 'post',
         },
         validation: {
           password: {
@@ -120,11 +121,11 @@ export const NB_CORE_PROVIDERS = [
             minLength: 4,
             maxLength: 10,
             regexp:
-              "/^(?=.*d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/",
+              '/^(?=.*d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/',
           },
           email: {
             required: true,
-            regexp: "/^[a-z0-9.]+@[a-z0-9]+.[a-z]+.([a-z]+)?$/i",
+            regexp: '/^[a-z0-9.]+@[a-z0-9]+.[a-z]+.([a-z]+)?$/i',
           },
         },
       }),
@@ -132,7 +133,7 @@ export const NB_CORE_PROVIDERS = [
 
     forms: {
       login: {
-        strategy: "email",
+        strategy: 'email',
         socialLinks: socialLinks,
       },
       register: {
@@ -144,13 +145,13 @@ export const NB_CORE_PROVIDERS = [
   NbSecurityModule.forRoot({
     accessControl: {
       guest: {
-        view: "*",
+        view: '*',
       },
       user: {
-        parent: "guest",
-        create: "*",
-        edit: "*",
-        remove: "*",
+        parent: 'guest',
+        create: '*',
+        edit: '*',
+        remove: '*',
       },
     },
   }).providers,
@@ -174,7 +175,7 @@ export const NB_CORE_PROVIDERS = [
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
-    throwIfAlreadyLoaded(parentModule, "CoreModule");
+    throwIfAlreadyLoaded(parentModule, 'CoreModule');
   }
 
   static forRoot(): ModuleWithProviders<CoreModule> {

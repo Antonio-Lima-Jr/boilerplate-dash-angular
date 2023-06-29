@@ -1,0 +1,14 @@
+FROM node:14.21.3 as build
+
+ENV DockerHOME=/project
+# where your code lives
+RUN mkdir -p $DockerHOME
+
+# set work directory
+WORKDIR $DockerHOME
+RUN npm cache clean --force
+
+COPY package.json $DockerHOME
+RUN npm install -g @angular/cli
+RUN npm install
+# RUN npm run start

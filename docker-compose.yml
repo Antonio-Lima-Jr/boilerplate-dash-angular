@@ -9,6 +9,19 @@ services:
     ports:
       - 8001:8001
 
+  # front-dev:
+  #   build:
+  #     context: ./front
+  #     dockerfile: Dockerfile.dev
+  #   container_name: front-dev
+  #   ports:
+  #     - 8001:8001
+  #   command: npm run start
+  #   volumes:
+  #     - ./front:/project
+  #   networks:
+  #     network:
+
   back:
     build:
       context: ./back

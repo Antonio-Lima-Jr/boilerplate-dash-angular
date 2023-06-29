@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
-
 import UserService from './user.service';
 
 const SERVICES = [UserService];
