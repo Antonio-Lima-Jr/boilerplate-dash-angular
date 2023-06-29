@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "rest_framework_simplejwt",
-    "drf_yasg",
+    "drf_spectacular",
     "celery",
     "m_user",
     "m_token",
@@ -56,6 +56,15 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"
     ],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Your Project API',
+    'DESCRIPTION': 'Your project description',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
 }
 
 # Simple JWT
@@ -84,7 +93,7 @@ CORS_ORIGIN_WHITELIST = (
     "http://127.0.0.1:80",
 )
 
-APPEND_SLASH=False
+APPEND_SLASH = False
 
 ROOT_URLCONF = "app.urls"
 

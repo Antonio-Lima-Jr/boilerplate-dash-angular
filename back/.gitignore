@@ -1,2 +1,3 @@
 /venv/
 /celerybeat/
+*/__pycache__/
