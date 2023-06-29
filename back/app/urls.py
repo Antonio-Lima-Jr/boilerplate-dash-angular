@@ -1,7 +1,8 @@
 from m_user import views
 from django.contrib import admin
 from django.urls import path, include, re_path
-
+from django.conf import settings
+from django.conf.urls.static import static
 from rest_framework import routers
 from rest_framework import permissions
 from drf_spectacular.views import (
@@ -11,13 +12,11 @@ from drf_spectacular.views import (
 )
 
 
-router = routers.DefaultRouter()
-router.register(r"users", views.UserViewSet)
-router.register(r"groups", views.GroupViewSet)
+
 
 urlpatterns = [
-    path("", include(router.urls)),
     path("admin/", admin.site.urls, name="admin"),
+    path("", include("m_user.urls"), name="v1"),
     path("api/v1/auth/", include("m_token.urls"), name="token"),
     # Docs
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
@@ -33,3 +32,6 @@ urlpatterns = [
         name="redoc",
     ),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

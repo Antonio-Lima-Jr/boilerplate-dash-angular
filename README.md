@@ -10,7 +10,7 @@ docker-compose up -d
 ## Services
 
 
-- [front](http://localhost:80)
+- [front](http://localhost:8001)
 - [back](http://localhost:8000)
 - [back - ADMIN](http://localhost:8000/admin)
 - [rabbitmq (Management UI)](http://localhost:15672)
@@ -18,6 +18,14 @@ docker-compose up -d
 - [prometheus](http://localhost:9090)
 - [cadvisor](http://localhost:8081)
 - [grafana](http://localhost:3001)
+
+### Swagger back-end
+
+
+- [schema](http://localhost:8000/api/schema/)
+- [Swagger](http://localhost:8000/api/schema/swagger-ui/)
+- [Redoc](http://localhost:8000/api/schema/redoc/)
+
 
 ### web
 

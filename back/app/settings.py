@@ -42,11 +42,16 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "drf_spectacular",
+    "corsheaders",
+    "versatileimagefield",
     "celery",
     "m_user",
     "m_token",
-    "corsheaders",
 ]
+
+# Config versatileimagefield
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Rest framework
 REST_FRAMEWORK = {
@@ -69,7 +74,7 @@ SPECTACULAR_SETTINGS = {
 
 # Simple JWT
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "ALGORITHM": "HS256",
     "SIGNING_KEY": SECRET_KEY,
