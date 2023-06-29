@@ -1,3 +1,5 @@
 /venv/
-/celerybeat/
-*/__pycache__/
+__pycache__/
+*.py[cod]
+*.so
+.vscode/
