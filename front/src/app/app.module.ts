@@ -11,6 +11,7 @@ import {
   NbChatModule,
   NbDatepickerModule,
   NbDialogModule,
+  NbGlobalPhysicalPosition,
   NbMenuModule,
   NbSidebarModule,
   NbSpinnerModule,
@@ -36,7 +37,9 @@ import { Interceptor } from './app.interceptor';
     NbDatepickerModule.forRoot(),
     NbDialogModule.forRoot(),
     NbWindowModule.forRoot(),
-    NbToastrModule.forRoot(),
+    NbToastrModule.forRoot({
+      position: NbGlobalPhysicalPosition.TOP_RIGHT,
+    }),
     NbSpinnerModule,
     NbChatModule.forRoot({
       messageGoogleMapKey: '',

@@ -1,14 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   NbMediaBreakpointsService,
+  NbMenuItem,
   NbMenuService,
   NbSidebarService,
   NbThemeService,
 } from '@nebular/theme';
 
+import { Router } from '@angular/router';
+import { NbAuthResult, NbAuthService } from '@nebular/auth';
 import { Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { UserData } from '../../../@core/data/user.data';
+import { THEMES } from '../../../@core/data/utils.data';
 import { LayoutService } from '../../../@core/utils';
 
 @Component({
@@ -20,28 +24,27 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
   userPictureOnly: boolean = false;
 
-  themes = [
-    {
-      value: 'default',
-      name: 'Light',
-    },
-    {
-      value: 'dark',
-      name: 'Dark',
-    },
-    {
-      value: 'cosmic',
-      name: 'Cosmic',
-    },
-    {
-      value: 'corporate',
-      name: 'Corporate',
-    },
-  ];
+  themes = THEMES;
 
   currentTheme = 'default';
 
-  userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
+  userMenu: NbMenuItem[] = [
+    { title: 'Profile', icon: 'person-outline' },
+    { title: 'Settings', icon: 'settings-2-outline' },
+    { title: 'Log out', icon: 'log-out-outline' },
+  ];
+
+  MENU_PROFILE_ACTIONS: { [key: string]: () => void } = {
+    'Log out': () => {
+      this.logout();
+    },
+    Profile: () => {
+      this.router.navigateByUrl('/dashboard/profile');
+    },
+    Settings: () => {
+      this.router.navigateByUrl('/dashboard/settings');
+    },
+  };
 
   constructor(
     private sidebarService: NbSidebarService,
@@ -49,7 +52,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private themeService: NbThemeService,
     private userService: UserData,
     private layoutService: LayoutService,
-    private breakpointService: NbMediaBreakpointsService
+    private breakpointService: NbMediaBreakpointsService,
+    private authService: NbAuthService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -72,6 +77,30 @@ export class HeaderComponent implements OnInit, OnDestroy {
         (isLessThanXl: boolean) =>
           (this.userPictureOnly = isLessThanXl)
       );
+
+    this.menuService
+      .onItemClick()
+      .pipe(
+        map(({ item: { title } }) => title),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((title) => {
+        if (this.MENU_PROFILE_ACTIONS.hasOwnProperty(title)) {
+          this.MENU_PROFILE_ACTIONS[title]();
+        }
+      });
+  }
+
+  logout() {
+    this.authService
+      .logout('email')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((result: NbAuthResult) => {
+        const redirect = result.getRedirect();
+        if (redirect) {
+          this.router.navigateByUrl(redirect);
+        }
+      });
   }
 
   ngOnDestroy() {
@@ -80,7 +109,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   changeTheme(themeName: string) {
-    this.userService.updateTheme(themeName);
+    this.userService.updateThemeLocal(themeName);
   }
 
   toggleSidebar(): boolean {

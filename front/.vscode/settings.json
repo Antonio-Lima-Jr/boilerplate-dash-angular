@@ -1,4 +1,9 @@
 {
     "typescript.tsdk": "./node_modules/typescript/lib",
-    "tslint.enable": false
+    "tslint.enable": false,
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#09323B",
+        "titleBar.activeBackground": "#0C4752",
+        "titleBar.activeForeground": "#F4FCFD"
+    }
 }

@@ -30,6 +30,7 @@ import {
 } from "./layouts";
 import {
   CapitalizePipe,
+  ImageBySizePipe,
   NumberWithCommasPipe,
   PluralPipe,
   RoundPipe,
@@ -71,6 +72,7 @@ const PIPES = [
   RoundPipe,
   TimingPipe,
   NumberWithCommasPipe,
+  ImageBySizePipe
 ];
 
 @NgModule({

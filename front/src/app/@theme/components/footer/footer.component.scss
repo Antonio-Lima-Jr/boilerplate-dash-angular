@@ -1,12 +1,13 @@
-@import "../../styles/themes";
-@import "@nebular/theme/styles/global/breakpoints";
-@import "bootstrap/scss/mixins/breakpoints";
+@import '../../styles/themes';
+@import '@nebular/theme/styles/global/breakpoints';
+@import 'bootstrap/scss/mixins/breakpoints';
 
 @include nb-install-component() {
   width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
+
   a {
     padding: 0.4rem;
     color: nb-theme(text-hint-color);

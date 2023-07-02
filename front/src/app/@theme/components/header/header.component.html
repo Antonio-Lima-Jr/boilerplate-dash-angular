@@ -27,8 +27,8 @@
       <nb-user
         [nbContextMenu]="userMenu"
         [onlyPicture]="userPictureOnly"
-        [name]="userService.name$ | async"
-        [picture]="userService.picture$ | async"
+        [name]="userService.username$ | async"
+        [picture]="userService.avatar$ | async | imageBySize:'thumbnail'"
       >
       </nb-user>
     </nb-action>

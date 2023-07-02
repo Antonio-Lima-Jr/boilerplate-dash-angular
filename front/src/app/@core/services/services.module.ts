@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
+import { AvatarRest } from './rest/avatar-rest.service';
+import { UserRest } from './rest/user-rest.service';
 import UserService from './user.service';
 
-const SERVICES = [UserService];
+const SERVICES = [UserService, AvatarRest, UserRest];
 
 @NgModule({
   declarations: [],

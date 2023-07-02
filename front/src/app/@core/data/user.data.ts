@@ -1,30 +1,37 @@
+import { HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Avatar } from './avatar.data';
 
 export type ID = string | number | undefined;
-export const INITIAL_AUTH: User = {
-  id: '',
-  username: '',
-  picture: '',
-  email: '',
-  theme: 'default',
-};
 
 export interface User {
   id?: ID;
   username?: string;
-  picture?: string;
   email?: string;
   theme?: string;
+  avatar?: Avatar;
 }
+
+export const INITIAL_AUTH: User = {
+  id: '',
+  username: '',
+  email: '',
+  theme: 'default',
+  avatar: {}
+};
 
 export abstract class UserData {
   abstract userCurrent$: Observable<User>;
   abstract id$: Observable<ID>;
   abstract username$: Observable<string>;
-  abstract picture$: Observable<string>;
   abstract email$: Observable<string>;
   abstract theme$: Observable<string>;
+  abstract avatar$: Observable<Avatar>
 
-  abstract updateTheme(auth: User['theme']): void;
-  abstract updateUser(auth: User): void;
+  abstract getUserDbById(id: ID, params?: HttpParams): void;
+  abstract updateAvatarDb(avatar: FormData): void;
+  abstract updateUserDb(user: User): void;
+  abstract updateThemeLocal(auth: User['theme']): void;
+  abstract updateUserLocal(user: Partial<User>): void;
+  abstract updateAvatarLocal(avatar: Partial<Avatar>): void
 }
